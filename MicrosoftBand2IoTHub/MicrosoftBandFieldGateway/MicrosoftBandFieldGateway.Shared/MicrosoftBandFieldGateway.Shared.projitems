@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c9b5ffee-687e-4523-a7d4-c5e5b61c4b37</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MicrosoftBandFieldGateway</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)AppSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BandServiceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\HttpUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\IoTHubServiceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\SHA.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\TimeSpanExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MicrosoftBandTelemetry.cs" />
+  </ItemGroup>
+</Project>
