@@ -17,10 +17,11 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)AppSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BandServiceManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\HttpUtility.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\IoTHubServiceManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\SHA.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IoTHubAmqp\TimeSpanExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHub\HttpUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHub\IoTHubHttpServiceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHub\IoTHubServiceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHub\SHA.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoTHub\TimeSpanExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MicrosoftBandTelemetry.cs" />
   </ItemGroup>
 </Project>
