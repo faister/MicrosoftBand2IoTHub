@@ -29,7 +29,7 @@ After you have created your custom device, your device shows the status as "Pend
 
 1. Open the solution in Visual Studio 2015.
 2. Rebuild the solution. This would restore any missing Nuget packages.
-3. Deploy this app to the Device. In the case of a Windows Phone, you will be able to deploy directly onto your device.
+3. Deploy this app to the Device. In the case of a Windows Phone, you will be able to deploy directly onto your device. If you get an error that says "Unable to debug Windows Store app", try to restart the application. If problem persists and you just want to run the app, just go to the Debug menu, and Start Without Debugging (Ctrl+F5).
 
 ### Configure App Settings
 
@@ -41,3 +41,47 @@ After you have created your custom device, your device shows the status as "Pend
 
 It’s important to understand that subscribing to sensor data effects the battery life of the Band. The use of each sensor requires a power draw (some more than others). This is the reason why you have to select a duration for the telemetry ingestion.
 On Windows and iOS, constant connectivity with the Microsoft Band device is required to maintain a subscription. If the Band loses connectivity with the phone, the subscription is stopped and it’s not automatically enabled upon reconnection.
+
+The following sensors are only available in Microsoft Band 2:
+1. Barometer data - Provides the current raw air pressure in hPa (hectopascals) and raw temperature in degrees Celsius.
+2. Galvanic Skin Response - Provides the current skin resistance of the wearer in kohms.
+3. Ambient Light - Provides the current light intensity (illuminance) in lux (Lumes per sq. meter).
+4. Altimeter - Provides current elevation data like total gain/loss, steps ascended/descended, flights ascended/descended, and elevation rate.
+
+### Microsoft Band biometric telemetry 
+
+Band telemetry are defined in a MicrosoftBandTelemetry class. If the respective properties are present and read from the device, they are serialized into a JSON string. Essentially the JSON string is the event data which is sent to the IoT Hub. You may perform your own complex event processing (CEP) in Azure IoT Suite by using either Azure Stream Analytics, developing your own EventProcessorHost and hosting within a WebJob, or other stream processing methods.
+
+    public class MicrosoftBandTelemetry
+    {
+        public string DeviceId { get; set; }
+        public string Accelerometer { get; set; }
+        public string Altimeter { get; set; }
+        public string AmbientLight { get; set; }
+        public string Barometer { get; set; }
+        public string Calories { get; set; }
+        public string Contact { get; set; }
+        public string Distance { get; set; }
+        public string Gyroscope { get; set; }
+        public string Gsr { get; set; }
+        public string HeartRate { get; set; }
+        public string Pedometer { get; set; }
+        public string RRInterval { get; set; }
+        public string SkinTemperature { get; set; }
+        public string UltravioletLight { get; set; }
+        public string AirPressure { get; internal set; }
+        public string GsrResistance { get; internal set; }
+        public string Brightness { get; internal set; }
+        public string Temperature { get; internal set; }
+        public string FlightsAscended { get; internal set; }
+        public string FlightsDescended { get; internal set; }
+        public string AltimeterRate { get; internal set; }
+        public string SteppingGain { get; internal set; }
+        public string SteppingLoss { get; internal set; }
+        public string StepsAscended { get; internal set; }
+        public string StepsDescended { get; internal set; }
+        public string TotalGain { get; internal set; }
+        public string TotalLoss { get; internal set; }
+        public string Humidity { get; internal set; }
+    }
+
