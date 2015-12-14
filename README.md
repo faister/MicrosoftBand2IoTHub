@@ -2,6 +2,7 @@
 This is a Microsoft Band cross-platform app that connects to the Azure IoT Hub. It is a pass-through app that bridges traffic between
 a connected Microsoft Band (1 or 2) device and Iot Hub. It allows bi-directional communication with the IoT Hub. 
 Leverages the Xamarin.Microsoft.Band and Microsoft.Band SDK Nuget packages. 
+NOTE: Currently only Windows Phone 8.1 app is implemented. Apps for other  platforms such as Windows 8, 10, Android and iOS are coming soon.
 
 ## How to Build and Run
 
