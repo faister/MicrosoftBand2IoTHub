@@ -551,6 +551,11 @@ namespace MicrosoftBandFieldGateway
 
         }
 
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AboutPage));
+        }
+
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AppSettingsPage));

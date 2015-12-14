@@ -34,6 +34,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Back" Icon="Back" Click="BackButton_Click"/>
                 <AppBarButton Label="Save" Icon="Save" Click="SaveButton_Click"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>

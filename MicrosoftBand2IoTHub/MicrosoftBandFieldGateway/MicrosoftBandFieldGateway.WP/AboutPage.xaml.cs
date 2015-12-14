@@ -20,17 +20,11 @@ namespace MicrosoftBandFieldGateway
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AppSettingsPage : Page
+    public sealed partial class AboutPage : Page
     {
-        public AppSettingsPage()
+        public AboutPage()
         {
             this.InitializeComponent();
-            Loaded += MainPage_Loaded;
-        }
-
-        void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            ContentPanel.DataContext = new AppSettings();
         }
 
         /// <summary>
@@ -40,11 +34,6 @@ namespace MicrosoftBandFieldGateway
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

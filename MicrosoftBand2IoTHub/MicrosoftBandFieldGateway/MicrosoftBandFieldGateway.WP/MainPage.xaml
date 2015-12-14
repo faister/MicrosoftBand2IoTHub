@@ -61,6 +61,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Settings" Icon="Setting" Click="AppBarButton_Click"/>
+                <AppBarButton Label="About" Icon="Account" Click="AboutButton_Click"/>                
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
