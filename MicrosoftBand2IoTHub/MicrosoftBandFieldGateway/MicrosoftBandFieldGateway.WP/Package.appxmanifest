@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="18d6dc70-a5e0-4b23-a51f-35d860655e96" Publisher="CN=hoongfai" Version="1.0.0.4" />
+  <Identity Name="18d6dc70-a5e0-4b23-a51f-35d860655e96" Publisher="CN=hoongfai" Version="1.0.0.7" />
   <mp:PhoneIdentity PhoneProductId="18d6dc70-a5e0-4b23-a51f-35d860655e96" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>MicrosoftBand-2-IoTHub</DisplayName>

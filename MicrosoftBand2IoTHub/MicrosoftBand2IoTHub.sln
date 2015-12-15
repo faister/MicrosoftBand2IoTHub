@@ -11,6 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftBandFieldGateway.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftBandFieldGateway.WP", "MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.WP\MicrosoftBandFieldGateway.WP.csproj", "{FB9EDF50-91E0-4E2D-9C3F-B72D08CBFCD4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{7E26FC44-69DA-428E-8077-A9275FFD3034}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WP8.1", "WP8.1", "{F9AB1DBB-B438-48CF-9058-DEF09CA489F0}"
+	ProjectSection(SolutionItems) = preProject
+		MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.WP\AppPackages\MicrosoftBandFieldGateway.WP_1.0.0.7_AnyCPU.zip = MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.WP\AppPackages\MicrosoftBandFieldGateway.WP_1.0.0.7_AnyCPU.zip
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.Shared\MicrosoftBandFieldGateway.Shared.projitems*{fb9edf50-91e0-4e2d-9c3f-b72d08cbfcd4}*SharedItemsImports = 4
@@ -84,5 +91,6 @@ Global
 		{C9B5FFEE-687E-4523-A7D4-C5E5B61C4B37} = {1967FC17-13FA-4D9D-83FE-45ADA137BE4D}
 		{426B6073-3838-48CA-B653-5315DDAA0F1C} = {1967FC17-13FA-4D9D-83FE-45ADA137BE4D}
 		{FB9EDF50-91E0-4E2D-9C3F-B72D08CBFCD4} = {1967FC17-13FA-4D9D-83FE-45ADA137BE4D}
+		{F9AB1DBB-B438-48CF-9058-DEF09CA489F0} = {7E26FC44-69DA-428E-8077-A9275FFD3034}
 	EndGlobalSection
 EndGlobal

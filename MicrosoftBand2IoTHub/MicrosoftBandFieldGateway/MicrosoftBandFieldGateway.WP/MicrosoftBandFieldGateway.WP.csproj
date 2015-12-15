@@ -102,6 +102,7 @@
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\Logo.scale-140.png" />
     <Content Include="Assets\Logo.scale-180.png" />
+    <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SampleMeTileImage.jpg" />
     <Content Include="Assets\SampleTileIconLarge.png" />
     <Content Include="Assets\SampleTileIconSmall.png" />
