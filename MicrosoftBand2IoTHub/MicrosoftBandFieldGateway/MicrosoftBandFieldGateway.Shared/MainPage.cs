@@ -204,38 +204,45 @@ namespace MicrosoftBandFieldGateway
                     if (bandClient.SensorManager.Barometer.IsSupported)
                     {
                         //ApplicationData.Current.LocalSettings.Values["AirPressure"] = "Band2 only";
-                        this.viewModel.AirPressure = "Band2 only";
                         // Subscribe to Barometer data. - (Microsoft Band 2 only) Provides the current raw air pressure in hPa (hectopascals) and raw temperature in degrees Celsius.
                         bandClient.SensorManager.Barometer.ReadingChanged += Barometer_ReadingChanged;
                         await bandClient.SensorManager.Barometer.StartReadingsAsync();
                     }
+                    else
+                        this.viewModel.AirPressure = "Band2 only";
+
                     if (bandClient.SensorManager.Gsr.IsSupported)
                     {
                         //ApplicationData.Current.LocalSettings.Values["GsrResistance"] = "Band2 only";
-                        this.viewModel.GsrResistance = "Band2 only";
                         // Subscribe to Galvanic Skin Response. - (Microsoft Band 2 only) Provides the current skin resistance of the wearer in kohms.
                         bandClient.SensorManager.Gsr.ReadingChanged += Gsr_ReadingChanged;
                         await bandClient.SensorManager.Gsr.StartReadingsAsync();
                     }
+                    else
+                        this.viewModel.GsrResistance = "Band2 only";
+
 
                     if (bandClient.SensorManager.AmbientLight.IsSupported)
                     {
                         //                        ApplicationData.Current.LocalSettings.Values["Brightness"] = "Band2 only";
-                        this.viewModel.Brightness = "Band2 only";
 
                         // Subscribe to Ambient Light - (Microsoft Band 2 only) Provides the current light intensity (illuminance) in lux (Lumes per sq. meter).
                         bandClient.SensorManager.AmbientLight.ReadingChanged += AmbientLight_ReadingChanged;
                         await bandClient.SensorManager.AmbientLight.StartReadingsAsync();
                     }
+                    else
+                        this.viewModel.Brightness = "Band2 only";
+
 
                     if (bandClient.SensorManager.Altimeter.IsSupported)
                     {
                         //ApplicationData.Current.LocalSettings.Values["AltimeterRate"] = "Band2 only";
-                        this.viewModel.AltimeterRate = "Band2 only";
                         // Subscribe to Altimeter - (Microsoft Band 2 only) Provides current elevation data like total gain/loss, steps ascended/descended, flights ascended/descended, and elevation rate.
                         bandClient.SensorManager.Altimeter.ReadingChanged += Altimeter_ReadingChanged;
                         await bandClient.SensorManager.Altimeter.StartReadingsAsync();
                     }
+                    else
+                        this.viewModel.AltimeterRate = "Band2 only";
 
                     //Receive HeartRate data for a duration picked by the user, then stop the subscription.
                     int ingestDuration = 0;
