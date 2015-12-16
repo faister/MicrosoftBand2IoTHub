@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IoTHub\IoTHubServiceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoTHub\SHA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoTHub\TimeSpanExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MicrosoftBandTelemetry.cs" />
   </ItemGroup>
 </Project>

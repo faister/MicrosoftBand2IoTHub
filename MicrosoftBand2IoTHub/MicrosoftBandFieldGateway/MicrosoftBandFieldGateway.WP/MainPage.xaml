@@ -10,7 +10,7 @@
 
     <Grid x:Name="ContentPanel">
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" Text="Microsoft Band -&gt; Azure IoT Suite" VerticalAlignment="Top" FontSize="40"/>
-        <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Left" Margin="253,133,0,0" VerticalAlignment="Top" FontFamily="Global User Interface" Click="StartButton_Click" />
+        <Button x:Name="StartButton" Content="{Binding ButtonContent}" HorizontalAlignment="Left" Margin="253,133,0,0" VerticalAlignment="Top" FontFamily="Global User Interface" Click="StartButton_Click" />
 
         <TextBlock x:Name="ResultsTitle" HorizontalAlignment="Left" Margin="10,268,0,0" TextWrapping="Wrap" Text="Microsoft Band Reading" VerticalAlignment="Top" FontSize="25" Foreground="#FFFBF400"/>
         <StackPanel x:Name="ResultsStackPanel" HorizontalAlignment="Left" Height="330" Margin="10,303,0,-53" VerticalAlignment="Top" Width="335" Orientation="Horizontal">
@@ -26,15 +26,15 @@
                 <TextBlock TextWrapping="Wrap" Text="Altimeter Rate:" FontSize="20" Padding="0,0,0,5"/>
             </StackPanel>
             <StackPanel Width="120">
-                <TextBlock x:Name="HRText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF2FF00"/>
-                <TextBlock x:Name="SkinTempText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-17,5" Foreground="#FFEEFB00"/>
-                <TextBlock x:Name="PedometerText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF0FD00"/>
-                <TextBlock x:Name="DistanceText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-17,5" Foreground="#FFE8F400"/>
-                <TextBlock x:Name="CaloriesText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF0FD00"/>
-                <TextBlock x:Name="BarometerText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-17,5" Foreground="#FFEDF900"/>
-                <TextBlock x:Name="GSRText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-17.167,5" Foreground="#FFEDF900"/>
-                <TextBlock x:Name="AmbientLightingText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-18.167,5" Foreground="#FFEDF900"/>
-                <TextBlock x:Name="AltimeterRateText" TextWrapping="Wrap" Text="" FontSize="20" Margin="0,0,-18.167,5" Foreground="#FFEDF900"/>
+                <TextBlock x:Name="HRText" TextWrapping="Wrap" Text="{Binding HeartRate}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF2FF00"/>
+                <TextBlock x:Name="SkinTempText" TextWrapping="Wrap" Text="{Binding SkinTemperature}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFEEFB00"/>
+                <TextBlock x:Name="PedometerText" TextWrapping="Wrap" Text="{Binding Pedometer}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF0FD00"/>
+                <TextBlock x:Name="DistanceText" TextWrapping="Wrap" Text="{Binding Distance}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFE8F400"/>
+                <TextBlock x:Name="CaloriesText" TextWrapping="Wrap" Text="{Binding Calories}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF0FD00"/>
+                <TextBlock x:Name="BarometerText" TextWrapping="Wrap" Text="{Binding AirPressure}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFEDF900"/>
+                <TextBlock x:Name="GSRText" TextWrapping="Wrap" Text="{Binding GsrResistance}" FontSize="20" Margin="0,0,-17.167,5" Foreground="#FFEDF900"/>
+                <TextBlock x:Name="AmbientLightingText" TextWrapping="Wrap" Text="{Binding Brightness}" FontSize="20" Margin="0,0,-18.167,5" Foreground="#FFEDF900"/>
+                <TextBlock x:Name="AltimeterRateText" TextWrapping="Wrap" Text="{Binding AltimeterRate}" FontSize="20" Margin="0,0,-18.167,5" Foreground="#FFEDF900"/>
             </StackPanel>
             <StackPanel Width="90">
                 <TextBlock TextWrapping="Wrap" Text="bpm" FontSize="20" Padding="0,0,0,5"/>
@@ -48,8 +48,8 @@
                 <TextBlock TextWrapping="Wrap" Text="cm/s" FontSize="20" Padding="0,0,0,5"/>
             </StackPanel>
         </StackPanel>
-        <TextBlock x:Name="MicrosoftBandTextBlock" HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Width="380" Height="69"/>
-        <ComboBox x:Name="IngestDurationComboBox" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="190" PlaceholderText="choose duration">
+        <TextBlock x:Name="MicrosoftBandTextBlock" HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="{Binding StatusMessage}" VerticalAlignment="Top" FontSize="20" Width="380" Height="69" />
+        <ComboBox x:Name="IngestDurationComboBox" SelectedIndex="{Binding IngestDuration}" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="190" PlaceholderText="choose duration">
             <ComboBoxItem Content="1 minute" FontSize="16" HorizontalAlignment="Left"/>
             <ComboBoxItem Content="5 minutes" FontSize="16" HorizontalAlignment="Left"/>
             <ComboBoxItem Content="10 minutes" FontSize="16" HorizontalAlignment="Left"/>

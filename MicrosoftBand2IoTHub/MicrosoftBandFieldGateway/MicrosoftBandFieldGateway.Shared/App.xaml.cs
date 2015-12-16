@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,11 +24,13 @@ namespace MicrosoftBandFieldGateway
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    public sealed partial class App : Application, INotifyPropertyChanged
     {
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -37,6 +40,197 @@ namespace MicrosoftBandFieldGateway
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+        }
+
+        public static new App Current
+        {
+            get { return (App)Application.Current; }
+        }
+
+        private string statusMessage = "Choose a duration and click Start to pair a Microsoft Band with your device.";
+        public string StatusMessage
+        {
+            get { return statusMessage; }
+            set
+            {
+                statusMessage = value;
+
+                if (PropertyChanged != null)
+                {
+                    //PropertyChanged(this, new PropertyChangedEventArgs("StatusMessage"));
+                    PropChange("StatusMessage");
+                }
+            }
+        }
+
+        private int _ingestDuration;
+        public int IngestDuration
+        {
+            get { return _ingestDuration; }
+            set
+            {
+                _ingestDuration = value;
+
+                if (PropertyChanged != null)
+                {
+                    //PropertyChanged(this, new PropertyChangedEventArgs("IngestDuration"));
+                    PropChange("IngestDuration");
+                }
+            }
+        }
+
+        private string _buttonContent;
+        public string ButtonContent
+        {
+            get
+            {
+                return _buttonContent;
+            }
+            set
+            {
+                _buttonContent = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("ButtonContent"));
+                PropChange("ButtonContent");
+            }
+        }
+
+        private string _heartRate;
+        public string HeartRate
+        {
+            get
+            {
+                return _heartRate;
+            }
+            set
+            {
+                _heartRate = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("HeartRate"));
+                PropChange("HeartRate");
+            }
+        }
+
+        private string _SkinTemperature;
+        public string SkinTemperature
+        {
+            get
+            {
+                return _SkinTemperature;
+            }
+            set
+            {
+                _SkinTemperature = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("SkinTemperature"));
+                PropChange("SkinTemperature");
+            }
+        }
+
+        private string _Pedometer;
+        public string Pedometer
+        {
+            get
+            {
+                return _Pedometer;
+            }
+            set
+            {
+                _Pedometer = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Pedometer"));
+                PropChange("Pedometer");
+            }
+        }
+
+
+        private string _Distance;
+        public string Distance
+        {
+            get
+            {
+                return _Distance;
+            }
+            set
+            {
+                _Distance = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Distance"));
+                PropChange("Distance");
+            }
+        }
+
+
+        private string _Calories;
+        public string Calories
+        {
+            get
+            {
+                return _Calories;
+            }
+            set
+            {
+                _Calories = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Calories"));
+                PropChange("Calories");
+            }
+        }
+
+        private string _AirPressure;
+        public string AirPressure
+        {
+            get
+            {
+                return _AirPressure;
+            }
+            set
+            {
+                _AirPressure = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("AirPressure"));
+                PropChange("AirPressure");
+            }
+        }
+
+
+        private string _GsrResistance;
+        public string GsrResistance
+        {
+            get
+            {
+                return _GsrResistance;
+            }
+            set
+            {
+                _GsrResistance = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("GsrResistance"));
+                PropChange("GsrResistance");
+
+            }
+        }
+
+        private string _Brightness;
+        public string Brightness
+        {
+            get
+            {
+                return _Brightness;
+            }
+            set
+            {
+                _Brightness = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("/*Brightness*/"));
+                PropChange("Brightness");
+            }
+        }
+
+        private string _AltimeterRate;
+        public string AltimeterRate
+        {
+            get
+            {
+                return _AltimeterRate;
+            }
+            set
+            {
+                _AltimeterRate = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("AltimeterRate"));
+                PropChange("AltimeterRate");
+            }
         }
 
         /// <summary>
@@ -133,5 +327,15 @@ namespace MicrosoftBandFieldGateway
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        private async void PropChange(string evt)
+        {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                //HERE GOES THE UI ACCESS 
+                PropertyChanged(this, new PropertyChangedEventArgs(evt));
+            });
+        }
+
     }
 }
