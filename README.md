@@ -8,9 +8,8 @@ NOTE: Currently only Windows Phone 8.1 app is implemented. Apps for other  platf
 
 ### Prerequisites
 
-This app requires an Azure IoT Hub. The easiest way to create an IoT Hub is by preconfiguring a remote monitoring solution in the 
-Azure IoT Suite. To provision a unit of the Azure IoT Suite, please sign in using an account with Microsoft Azure subscription administrator
-privilege at https://www.azureiotsuite.com. Create a remote monitoring solution.
+This app requires Azure IoT Hub. The easiest way to create an IoT Hub is by preconfiguring a remote monitoring solution in the 
+Azure IoT Suite. To provision a unit of the Azure IoT Suite, please sign in using an account with Microsoft Azure subscription administrator privilege at https://www.azureiotsuite.com. Create a remote monitoring solution.
 
 ### Adding a Device
 
@@ -19,7 +18,7 @@ solution, "REMOTE", the URL to your dashboard will be https://remote.azurewebsit
 2. Add a Device.
 3. Under "Custom Device", click "Add New".
 4. Define your own Device ID so that it is easier to find your device in the remote monitoring dashboard.
-5. Copy the Device ID, IoT Hub Hostname, and Device Key into a blank text file, i.e., in Notepad. You will need copy and paste these credentials into the MicrosoftBand2IoTHub app settings later.
+5. Copy the Device ID, IoT Hub Hostname, and Device Key into a blank text file, i.e., in Notepad. You will need copy and paste these credentials into the MicrosoftBand2IoTHub app settings later. Email this file to yourself so that you can copy and paste the credentials into the app as described in the steps below.
 
 ### Device List
 
@@ -43,6 +42,7 @@ It’s important to understand that subscribing to sensor data effects the batte
 On Windows and iOS, constant connectivity with the Microsoft Band device is required to maintain a subscription. If the Band loses connectivity with the phone, the subscription is stopped and it’s not automatically enabled upon reconnection.
 
 The following sensors are only available in Microsoft Band 2:
+
 1. Barometer data - Provides the current raw air pressure in hPa (hectopascals) and raw temperature in degrees Celsius.
 2. Galvanic Skin Response - Provides the current skin resistance of the wearer in kohms.
 3. Ambient Light - Provides the current light intensity (illuminance) in lux (Lumes per sq. meter).
@@ -50,7 +50,7 @@ The following sensors are only available in Microsoft Band 2:
 
 ### Microsoft Band biometric telemetry 
 
-Band telemetry are defined in a MicrosoftBandTelemetry class. If the respective properties are present and read from the device, they are serialized into a JSON string. Essentially the JSON string is the event data which is sent to the IoT Hub. You may perform your own complex event processing (CEP) in Azure IoT Suite by using either Azure Stream Analytics, developing your own EventProcessorHost and hosting within a WebJob, or other stream processing methods.
+Band telemetry are defined in a MicrosoftBandTelemetry class. If the respective properties are present and read from the device, they are serialized into a JSON string. Essentially the JSON string is the event data which is sent to the IoT Hub. You may perform your own complex event processing (CEP) in Azure IoT Suite by using either Azure Stream Analytics, developing your own EventProcessorHost and hosting within a WebJob, or using any other stream processing methods.
 
     public class MicrosoftBandTelemetry
     {
@@ -85,3 +85,7 @@ Band telemetry are defined in a MicrosoftBandTelemetry class. If the respective 
         public string Humidity { get; internal set; }
     }
 
+The event data in JSON looks like the following:
+Data:[{"DeviceId":"SydneyBand","Calories":"436436","Distance":"78008489","HeartRate":"69","SkinTemperature":"34.49","Temperature":"34.49","Humidity":"69"}]
+
+You may have noticed that there are two additional data points in the JSON string which are weird. I have repeated the values for heart rate and skin temperature as "Humidity" and "Temperature" respectively. The reason for this is because I just want these telemetry data to be visualized on the Azure IoT Suite remote monitoring web dashboard as is without any modification. 
