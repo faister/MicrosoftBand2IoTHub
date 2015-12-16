@@ -34,7 +34,6 @@ namespace MicrosoftBandFieldGateway
         // Used for refreshing the number of samples received when the app is visible
         private static DispatcherTimer _refreshTimer;
 
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -85,7 +84,7 @@ namespace MicrosoftBandFieldGateway
 
             _refreshTimer.Start();
             // Store a setting for the background task to read
-            ApplicationData.Current.LocalSettings.Values["IsAppVisible"] = true;
+            this.viewModel.IsAppVisible = true;
 
         }
 
@@ -98,7 +97,7 @@ namespace MicrosoftBandFieldGateway
         /// </param>
         private void VisibilityChanged(object sender, VisibilityChangedEventArgs e)
         {
-            ApplicationData.Current.LocalSettings.Values["IsAppVisible"] = e.Visible;
+            this.viewModel.IsAppVisible = e.Visible;
 
             if (e.Visible)
             {
@@ -129,28 +128,6 @@ namespace MicrosoftBandFieldGateway
                 IsDeviceInfoUpdated = true;
             }
 
-            //HRText.Text = ApplicationData.Current.LocalSettings.Values["HeartRate"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["HeartRate"].ToString();
-            //SkinTempText.Text = ApplicationData.Current.LocalSettings.Values["SkinTemperature"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["SkinTemperature"].ToString();
-            //PedometerText.Text = ApplicationData.Current.LocalSettings.Values["Pedometer"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["Pedometer"].ToString();
-            //DistanceText.Text = ApplicationData.Current.LocalSettings.Values["Distance"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["Distance"].ToString();
-            //CaloriesText.Text = ApplicationData.Current.LocalSettings.Values["Calories"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["Calories"].ToString();
-            //BarometerText.Text = ApplicationData.Current.LocalSettings.Values["AirPressure"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["AirPressure"].ToString();
-            //GSRText.Text = ApplicationData.Current.LocalSettings.Values["GsrResistance"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["GsrResistance"].ToString();
-            //AmbientLightingText.Text = ApplicationData.Current.LocalSettings.Values["Brightness"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["Brightness"].ToString();
-            //AltimeterRateText.Text = ApplicationData.Current.LocalSettings.Values["AltimeterRate"] == null ? "N/A" : ApplicationData.Current.LocalSettings.Values["AltimeterRate"].ToString();
-        }
-
-        private void ResetTelemetryReading()
-        {
-            ApplicationData.Current.LocalSettings.Values["HeartRate"] = null;
-            ApplicationData.Current.LocalSettings.Values["SkinTemperature"] = null;
-            ApplicationData.Current.LocalSettings.Values["Pedometer"] = null;
-            ApplicationData.Current.LocalSettings.Values["Distance"] = null;
-            ApplicationData.Current.LocalSettings.Values["Calories"] = null;
-            ApplicationData.Current.LocalSettings.Values["AirPressure"] = null;
-            ApplicationData.Current.LocalSettings.Values["GsrResistance"] = null;
-            ApplicationData.Current.LocalSettings.Values["Brightness"] = null;
-            ApplicationData.Current.LocalSettings.Values["AltimeterRate"] = null;
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)

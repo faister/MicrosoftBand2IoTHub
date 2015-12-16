@@ -290,7 +290,7 @@ namespace MicrosoftBandFieldGateway
             {
                 // handle a Band connection exception } 
                 System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("[hh:ss.fff]") + " " + ex.ToString());
-                this.viewModel.StatusMessage = "Error: Unable to connect to Microsoft Band.";
+                this.viewModel.StatusMessage = "Error: Unable to communicate with Microsoft Band.";
             }
             return;
         }

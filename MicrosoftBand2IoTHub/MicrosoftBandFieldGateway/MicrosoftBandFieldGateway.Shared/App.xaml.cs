@@ -63,6 +63,13 @@ namespace MicrosoftBandFieldGateway
             }
         }
 
+        private bool _IsAppVisible = false;
+        public bool IsAppVisible
+        {
+            get { return _IsAppVisible; }
+            set { _IsAppVisible = value; }
+        }
+
         private int _ingestDuration;
         public int IngestDuration
         {
