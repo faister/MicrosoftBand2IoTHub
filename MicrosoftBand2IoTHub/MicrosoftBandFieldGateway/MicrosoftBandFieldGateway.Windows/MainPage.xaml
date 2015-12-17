@@ -24,18 +24,18 @@
                 <TextBlock TextWrapping="Wrap" Text="Ambient Light:" FontSize="20" Padding="0,0,0,5"/>
                 <TextBlock TextWrapping="Wrap" Text="Altimeter Rate:" FontSize="20" Padding="0,0,0,5"/>
             </StackPanel>
-            <StackPanel Width="120">
-                <TextBlock x:Name="HRText" TextWrapping="Wrap" Text="{Binding HeartRate}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF2FF00"/>
-                <TextBlock x:Name="SkinTempText" TextWrapping="Wrap" Text="{Binding SkinTemperature}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFEEFB00"/>
-                <TextBlock x:Name="PedometerText" TextWrapping="Wrap" Text="{Binding Pedometer}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF0FD00"/>
-                <TextBlock x:Name="DistanceText" TextWrapping="Wrap" Text="{Binding Distance}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFE8F400"/>
-                <TextBlock x:Name="CaloriesText" TextWrapping="Wrap" Text="{Binding Calories}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFF0FD00"/>
-                <TextBlock x:Name="BarometerText" TextWrapping="Wrap" Text="{Binding AirPressure}" FontSize="20" Margin="0,0,-17,5" Foreground="#FFEDF900"/>
-                <TextBlock x:Name="GSRText" TextWrapping="Wrap" Text="{Binding GsrResistance}" FontSize="20" Margin="0,0,-17.167,5" Foreground="#FFEDF900"/>
-                <TextBlock x:Name="AmbientLightingText" TextWrapping="Wrap" Text="{Binding Brightness}" FontSize="20" Margin="0,0,-18.167,5" Foreground="#FFEDF900"/>
-                <TextBlock x:Name="AltimeterRateText" TextWrapping="Wrap" Text="{Binding AltimeterRate}" FontSize="20" Margin="0,0,-18.167,5" Foreground="#FFEDF900"/>
+            <StackPanel Width="150">
+                <TextBlock x:Name="HRText" TextWrapping="Wrap" Text="{Binding HeartRate}" FontSize="20" Margin="0,0,0,5" Foreground="#FFF2FF00"/>
+                <TextBlock x:Name="SkinTempText" TextWrapping="Wrap" Text="{Binding SkinTemperature}" FontSize="20" Margin="0,0,0,5" Foreground="#FFEEFB00"/>
+                <TextBlock x:Name="PedometerText" TextWrapping="Wrap" Text="{Binding Pedometer}" FontSize="20" Margin="0,0,0,5" Foreground="#FFF0FD00"/>
+                <TextBlock x:Name="DistanceText" TextWrapping="Wrap" Text="{Binding Distance}" FontSize="20" Margin="0,0,10,5" Foreground="#FFE8F400"/>
+                <TextBlock x:Name="CaloriesText" TextWrapping="Wrap" Text="{Binding Calories}" FontSize="20" Margin="0,0,0,5" Foreground="#FFF0FD00"/>
+                <TextBlock x:Name="BarometerText" TextWrapping="Wrap" Text="{Binding AirPressure}" FontSize="20" Margin="0,0,0,5" Foreground="#FFEDF900"/>
+                <TextBlock x:Name="GSRText" TextWrapping="Wrap" Text="{Binding GsrResistance}" FontSize="20" Margin="0,0,0,5" Foreground="#FFEDF900"/>
+                <TextBlock x:Name="AmbientLightingText" TextWrapping="Wrap" Text="{Binding Brightness}" FontSize="20" Margin="0,0,0,5" Foreground="#FFEDF900"/>
+                <TextBlock x:Name="AltimeterRateText" TextWrapping="Wrap" Text="{Binding AltimeterRate}" FontSize="20" Margin="0,0,0,5" Foreground="#FFEDF900"/>
             </StackPanel>
-            <StackPanel Width="90">
+            <StackPanel Width="120">
                 <TextBlock TextWrapping="Wrap" Text="bpm" FontSize="20" Padding="0,0,0,5"/>
                 <TextBlock TextWrapping="Wrap" Text="deg C" FontSize="20" Padding="0,0,0,5"/>
                 <TextBlock TextWrapping="Wrap" Text="steps" FontSize="20" Padding="0,0,0,5"/>

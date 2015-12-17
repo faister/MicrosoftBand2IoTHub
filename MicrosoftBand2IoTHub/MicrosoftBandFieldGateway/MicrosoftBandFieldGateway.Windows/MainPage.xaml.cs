@@ -130,5 +130,7 @@ namespace MicrosoftBandFieldGateway
         {
             this.Frame.Navigate(typeof(AppSettingsPage));
         }
+
+
     }
 }
