@@ -381,7 +381,8 @@ namespace MicrosoftBandFieldGateway
         {
             samplesReceived++;
 
-            string val = e.SensorReading.AirPressure.ToString();
+            double ap = Math.Round(e.SensorReading.AirPressure, 2);
+            string val = ap.ToString();
             bandTelemetry.AirPressure = val;
             //ApplicationData.Current.LocalSettings.Values["AirPressure"] = val;
             this.viewModel.AirPressure = val;
