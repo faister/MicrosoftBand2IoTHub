@@ -16,15 +16,15 @@ namespace MicrosoftBandFieldGateway
         public string Distance { get; set; }
         public string Gyroscope { get; set; }
         public string Gsr { get; set; }
-        public string HeartRate { get; set; }
+        public int HeartRate { get; set; }
         public string Pedometer { get; set; }
         public string RRInterval { get; set; }
-        public string SkinTemperature { get; set; }
+        public double SkinTemperature { get; set; }
         public string UltravioletLight { get; set; }
         public string AirPressure { get; internal set; }
         public string GsrResistance { get; internal set; }
-        public string Brightness { get; internal set; }
-        public string Temperature { get; internal set; }
+        public int Brightness { get; internal set; }
+        public double Temperature { get; internal set; }
         public string FlightsAscended { get; internal set; }
         public string FlightsDescended { get; internal set; }
         public string AltimeterRate { get; internal set; }
@@ -34,6 +34,6 @@ namespace MicrosoftBandFieldGateway
         public string StepsDescended { get; internal set; }
         public string TotalGain { get; internal set; }
         public string TotalLoss { get; internal set; }
-        public string Humidity { get; internal set; }
+        public double Humidity { get; internal set; }
     }
 }

@@ -49,11 +49,8 @@
             </StackPanel>
         </StackPanel>
         <TextBlock x:Name="MicrosoftBandTextBlock" HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="{Binding StatusMessage}" VerticalAlignment="Top" FontSize="20" Width="380" Height="69" />
-        <ComboBox x:Name="IngestDurationComboBox" SelectedIndex="{Binding IngestDuration}" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="190" PlaceholderText="choose duration">
-            <ComboBoxItem Content="1 minute" FontSize="16" HorizontalAlignment="Left"/>
+        <ComboBox x:Name="IngestDurationComboBox" SelectedValue="{Binding IngestDuration, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="190" PlaceholderText="Duration: 5 mins">
             <ComboBoxItem Content="5 minutes" FontSize="16" HorizontalAlignment="Left"/>
-            <ComboBoxItem Content="10 minutes" FontSize="16" HorizontalAlignment="Left"/>
-            <ComboBoxItem Content="15 minutes" FontSize="16" HorizontalAlignment="Left"/>
         </ComboBox>
 
     </Grid>

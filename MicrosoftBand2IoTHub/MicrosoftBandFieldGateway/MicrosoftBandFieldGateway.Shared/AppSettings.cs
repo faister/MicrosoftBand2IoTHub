@@ -19,13 +19,12 @@ namespace MicrosoftBandFieldGateway
         const string DeviceKeySettingKeyName = "DeviceKeySetting";
 
         // The default value of our settings
-        //const string DeviceIDSettingDefault = "IgniteBand";
-        //const string IoTHubHostNameSettingDefault = "faisterremote.azure-devices.net";
-        //const string DeviceKeySettingDefault = "RtBb9H28DX/TsgTcwUFpZg==";
-        const string DeviceIDSettingDefault = "SydneyBand";
+        const string DeviceIDSettingDefault = "MicrosoftBand";
         const string IoTHubHostNameSettingDefault = "sydneyremote.azure-devices.net";
-        const string DeviceKeySettingDefault = "u9rF4kfsXktrI9QHvzlmqA==";
-
+        const string DeviceKeySettingDefault = "SAqvmtrMLbPQoKdxdg4WyA==";
+        //const string DeviceIDSettingDefault = "ClayBand";
+        //const string IoTHubHostNameSettingDefault = "ClayRemote.azure-devices.net";
+        //const string DeviceKeySettingDefault = "LBbvC0/wvDP0c2hoyIancYQxwPCaGXeVQPfA30ilDUM=";
 
         /// <summary>
         /// Constructor that gets the application settings.

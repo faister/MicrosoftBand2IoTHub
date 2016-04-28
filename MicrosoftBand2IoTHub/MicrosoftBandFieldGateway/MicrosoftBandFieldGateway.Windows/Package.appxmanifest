@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="4cfa72b6-0e9d-4a6d-823a-7c4f226a5611" Publisher="CN=hoongfai" Version="1.0.0.0" />
+  <Identity Name="4cfa72b6-0e9d-4a6d-823a-7c4f226a5611" Publisher="CN=hoongfai" Version="1.0.0.3" />
   <Properties>
     <DisplayName>MicrosoftBandFieldGateway.Windows</DisplayName>
     <PublisherDisplayName>hoongfai</PublisherDisplayName>

@@ -47,7 +47,7 @@ namespace MicrosoftBandFieldGateway
             get { return (App)Application.Current; }
         }
 
-        private string statusMessage = "Choose a duration and click Start to pair a Microsoft Band with your device.";
+        private string statusMessage = "Press Start to pair a Microsoft Band with your device.";
         public string StatusMessage
         {
             get { return statusMessage; }
@@ -70,8 +70,8 @@ namespace MicrosoftBandFieldGateway
             set { _IsAppVisible = value; }
         }
 
-        private int _ingestDuration;
-        public int IngestDuration
+        private string _ingestDuration;
+        public string IngestDuration
         {
             get { return _ingestDuration; }
             set
@@ -220,7 +220,7 @@ namespace MicrosoftBandFieldGateway
             set
             {
                 _Brightness = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("/*Brightness*/"));
+                //PropertyChanged(this, new PropertyChangedEventArgs("/*Brightness*/"));
                 PropChange("Brightness");
             }
         }

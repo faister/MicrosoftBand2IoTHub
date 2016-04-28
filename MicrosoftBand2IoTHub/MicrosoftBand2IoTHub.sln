@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicrosoftBandFieldGateway",
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MicrosoftBandFieldGateway.Shared", "MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.Shared\MicrosoftBandFieldGateway.Shared.shproj", "{C9B5FFEE-687E-4523-A7D4-C5E5B61C4B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftBandFieldGateway.Windows", "MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.Windows\MicrosoftBandFieldGateway.Windows.csproj", "{426B6073-3838-48CA-B653-5315DDAA0F1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftBandFieldGateway.Win", "MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.Windows\MicrosoftBandFieldGateway.Win.csproj", "{426B6073-3838-48CA-B653-5315DDAA0F1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftBandFieldGateway.WP", "MicrosoftBandFieldGateway\MicrosoftBandFieldGateway.WP\MicrosoftBandFieldGateway.WP.csproj", "{FB9EDF50-91E0-4E2D-9C3F-B72D08CBFCD4}"
 EndProject

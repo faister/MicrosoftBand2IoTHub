@@ -256,26 +256,26 @@ namespace MicrosoftBandFieldGateway
                         this.viewModel.AltimeterRate = "Band2 only";
 
                     //Receive HeartRate data for a duration picked by the user, then stop the subscription.
-                    int ingestDuration = 0;
-                    switch (this.viewModel.IngestDuration)
-                    {
-                        case 0:
-                            ingestDuration = 1;
-                            break;
-                        case 1:
-                            ingestDuration = 5;
-                            break;
-                        case 2:
-                            ingestDuration = 10;
-                            break;
-                        case 3:
-                            ingestDuration = 15;
-                            break;
+                    double ingestDuration = 5;
+                    //switch (this.viewModel.IngestDuration.ToString())
+                    //{
+                    //    case "1 minute":
+                    //        ingestDuration = 1;
+                    //        break;
+                    //    case "5 minutes":
+                    //        ingestDuration = 5;
+                    //        break;
+                    //    case "10 minutes":
+                    //        ingestDuration = 10;
+                    //        break;
+                    //    case "15 minutes":
+                    //        ingestDuration = 15;
+                    //        break;
 
-                        default:
-                            ingestDuration = 1;
-                            break;
-                    }
+                    //    default:
+                    //        ingestDuration = 1;
+                    //        break;
+                    //}
 
                     await Task.Delay(TimeSpan.FromMinutes(ingestDuration));
 
@@ -302,6 +302,7 @@ namespace MicrosoftBandFieldGateway
                 // handle a Band connection exception } 
                 System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("[hh:ss.fff]") + " " + ex.ToString());
                 this.viewModel.StatusMessage = "Error: Unable to communicate with Microsoft Band.";
+                this.viewModel.ButtonContent = "Start";
             }
             return;
         }
@@ -311,43 +312,43 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string fa = e.SensorReading.FlightsAscended.ToString();
-            bandTelemetry.FlightsAscended = fa;
+            //bandTelemetry.FlightsAscended = fa;
             //ApplicationData.Current.LocalSettings.Values["FlightsAscended"] = fa;
 
             string fd = e.SensorReading.FlightsDescended.ToString();
-            bandTelemetry.FlightsDescended = fa;
+            //bandTelemetry.FlightsDescended = fa;
             //ApplicationData.Current.LocalSettings.Values["FlightsDescended"] = fd;
 
             string r = e.SensorReading.Rate.ToString();
-            bandTelemetry.AltimeterRate = r;
+            //bandTelemetry.AltimeterRate = r;
             //ApplicationData.Current.LocalSettings.Values["AltimeterRate"] = r;
             this.viewModel.AltimeterRate = r;
 
             string sg = e.SensorReading.SteppingGain.ToString();
-            bandTelemetry.SteppingGain = sg;
+            //bandTelemetry.SteppingGain = sg;
             //ApplicationData.Current.LocalSettings.Values["SteppingGain"] = sg;
 
             string sl = e.SensorReading.SteppingLoss.ToString();
-            bandTelemetry.SteppingLoss = sl;
+            //bandTelemetry.SteppingLoss = sl;
             //ApplicationData.Current.LocalSettings.Values["SteppingLoss"] = sl;
 
             string sa = e.SensorReading.StepsAscended.ToString();
-            bandTelemetry.StepsAscended = sa;
+            //bandTelemetry.StepsAscended = sa;
             //ApplicationData.Current.LocalSettings.Values["StepsAscended"] = sa;
 
             string sd = e.SensorReading.StepsDescended.ToString();
-            bandTelemetry.StepsDescended = sd;
+            //bandTelemetry.StepsDescended = sd;
             //ApplicationData.Current.LocalSettings.Values["StepsDescended"] = sd;
 
             string tg = e.SensorReading.TotalGain.ToString();
-            bandTelemetry.TotalGain = tg;
+            //bandTelemetry.TotalGain = tg;
             //ApplicationData.Current.LocalSettings.Values["TotalGain"] = tg;
 
             string tl = e.SensorReading.TotalLoss.ToString();
-            bandTelemetry.TotalLoss = tl;
+            //bandTelemetry.TotalLoss = tl;
             //ApplicationData.Current.LocalSettings.Values["TotalLoss"] = tl;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
         private void AmbientLight_ReadingChanged(object sender, BandSensorReadingEventArgs<IBandAmbientLightReading> e)
@@ -355,12 +356,12 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string val = e.SensorReading.Brightness.ToString();
-            bandTelemetry.Brightness = val;
+            bandTelemetry.Brightness = e.SensorReading.Brightness;
 
             //ApplicationData.Current.LocalSettings.Values["Brightness"] = val;
             this.viewModel.Brightness = val;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
 
         }
 
@@ -369,12 +370,12 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string val = e.SensorReading.Resistance.ToString();
-            bandTelemetry.GsrResistance = val;
+            //bandTelemetry.GsrResistance = val;
 
             //ApplicationData.Current.LocalSettings.Values["GsrResistance"] = val;
             this.viewModel.GsrResistance = val;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
         private void Barometer_ReadingChanged(object sender, BandSensorReadingEventArgs<IBandBarometerReading> e)
@@ -383,15 +384,15 @@ namespace MicrosoftBandFieldGateway
 
             double ap = Math.Round(e.SensorReading.AirPressure, 2);
             string val = ap.ToString();
-            bandTelemetry.AirPressure = val;
+            //bandTelemetry.AirPressure = val; //skip this because it is a large value it would skew the dynamic telemetry graph
             //ApplicationData.Current.LocalSettings.Values["AirPressure"] = val;
             this.viewModel.AirPressure = val;
 
-            string val2 = e.SensorReading.Temperature.ToString();
-            bandTelemetry.Temperature = val2;
+            //string val2 = e.SensorReading.Temperature.ToString();
+            bandTelemetry.Temperature = e.SensorReading.Temperature;
             //ApplicationData.Current.LocalSettings.Values["Temperature"] = val;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
         private void Calories_ReadingChanged(object sender, BandSensorReadingEventArgs<IBandCaloriesReading> e)
@@ -399,12 +400,12 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string val = e.SensorReading.Calories.ToString();
-            bandTelemetry.Calories = val;
+            //bandTelemetry.Calories = val;
 
             //ApplicationData.Current.LocalSettings.Values["Calories"] = val;
             this.viewModel.Calories = val;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
         private void Distance_ReadingChanged(object sender, BandSensorReadingEventArgs<IBandDistanceReading> e)
@@ -412,12 +413,12 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string val = e.SensorReading.TotalDistance.ToString();
-            bandTelemetry.Distance = val;
+            //bandTelemetry.Distance = val;
 
             //ApplicationData.Current.LocalSettings.Values["Distance"] = val;
             this.viewModel.Distance = val;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
         private void SkinTemperature_ReadingChanged(object sender, BandSensorReadingEventArgs<IBandSkinTemperatureReading> e)
@@ -425,13 +426,13 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string val = e.SensorReading.Temperature.ToString();
-            bandTelemetry.SkinTemperature = val;
-            bandTelemetry.Temperature = val;
+            bandTelemetry.SkinTemperature = e.SensorReading.Temperature;
+            //bandTelemetry.Temperature = val;
 
             //ApplicationData.Current.LocalSettings.Values["SkinTemperature"] = val;
             this.viewModel.SkinTemperature = val;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
         private void Pedometer_ReadingChanged(object sender, BandSensorReadingEventArgs<IBandPedometerReading> e)
@@ -439,12 +440,12 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string steps = e.SensorReading.TotalSteps.ToString();
-            bandTelemetry.Pedometer = steps;
+            //bandTelemetry.Pedometer = steps;
 
             //ApplicationData.Current.LocalSettings.Values["Pedometer"] = steps;
             this.viewModel.Pedometer = steps;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
         /// <summary>
@@ -457,13 +458,16 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string hrm = e.SensorReading.HeartRate.ToString();
-            bandTelemetry.HeartRate = hrm;
-            bandTelemetry.Humidity = hrm; // using Humidity as placeholder because the current Remote Monitoring dashboard only shows 2 data points; humidity and temperature
+            bandTelemetry.HeartRate = e.SensorReading.HeartRate;
+            // Generate a random double for humidity
+            Random random = new Random();
+            bandTelemetry.Humidity = random.NextDouble() * (60 - 50) + 50;
+            //bandTelemetry.Humidity = hrm; // using Humidity as placeholder because the current Remote Monitoring dashboard only shows 2 data points; humidity and temperature
 
             //ApplicationData.Current.LocalSettings.Values["HeartRate"] = hrm;
             this.viewModel.HeartRate = hrm;
 
-            IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
+            var myTask = IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
         }
 
 #else
@@ -515,13 +519,15 @@ namespace MicrosoftBandFieldGateway
                     return;
                 }
 
-                bandClient = await bandClientManager.ConnectAsync(bandInfo);
-                    // do work after successful connect     
-                    ConnectedBandName = bandInfo.Name;
-                    this.viewModel.StatusMessage = "Connected: " + ConnectedBandName;
+                if (bandClient == null)
+                    bandClient = await bandClientManager.ConnectAsync(bandInfo);
 
-                    FWVersion = await bandClient.GetFirmwareVersionAsync();
-                    HWVersion = await bandClient.GetHardwareVersionAsync();
+                // do work after successful connect     
+                ConnectedBandName = bandInfo.Name;
+                this.viewModel.StatusMessage = "Connected: " + ConnectedBandName;
+
+                FWVersion = await bandClient.GetFirmwareVersionAsync();
+                HWVersion = await bandClient.GetHardwareVersionAsync();
 
                 bool heartRateConsentGranted = false;
 
@@ -529,112 +535,112 @@ namespace MicrosoftBandFieldGateway
                 if (bandClient.SensorManager.HeartRate.UserConsented == UserConsent.Unspecified)
                 {
                     // user hasn’t consented, request consent  
-                    await bandClient.SensorManager.HeartRate.RequestUserConsent();
+                    heartRateConsentGranted = await bandClient.SensorManager.HeartRate.RequestUserConsent();
                 }
 
 
-                    if (!heartRateConsentGranted)
-                    {
-                        this.viewModel.StatusMessage = "Access to the heart rate sensor is denied.";
-                        return;
-                    }
-
-                    // Subscribe to HeartRate data.
-                    bandClient.SensorManager.HeartRate.ReadingChanged += HeartRate_ReadingChanged;
-                    await bandClient.SensorManager.HeartRate.StartReadingsAsync();
-
-                    // hook up to the Skin temperature sensor ReadingChanged event 
-                    bandClient.SensorManager.SkinTemperature.ReadingChanged += SkinTemperature_ReadingChanged;
-                    await bandClient.SensorManager.SkinTemperature.StartReadingsAsync();
-
-                    // hook up to the Distance sensor ReadingChanged event 
-                    bandClient.SensorManager.Distance.ReadingChanged += Distance_ReadingChanged;
-                    await bandClient.SensorManager.Distance.StartReadingsAsync();
-
-                    // hook up to the Calories sensor ReadingChanged event 
-                    bandClient.SensorManager.Calories.ReadingChanged += Calories_ReadingChanged;
-                    await bandClient.SensorManager.Calories.StartReadingsAsync();
-
-                        // Subscribe to Altimeter data.
-                        bandClient.SensorManager.Pedometer.ReadingChanged += Pedometer_ReadingChanged;
-                        await bandClient.SensorManager.Pedometer.StartReadingsAsync();
-
-                    if (bandClient.SensorManager.Barometer != null)
-                    {
-                        // Subscribe to Barometer data. - (Microsoft Band 2 only) Provides the current raw air pressure in hPa (hectopascals) and raw temperature in degrees Celsius.
-                        bandClient.SensorManager.Barometer.ReadingChanged += Barometer_ReadingChanged;
-                        await bandClient.SensorManager.Barometer.StartReadingsAsync();
-                    }
-                    else
-                        this.viewModel.AirPressure = "Band2 only";
-
-                    if (bandClient.SensorManager.Gsr != null)
-                    {
-                        // Subscribe to Galvanic Skin Response. - (Microsoft Band 2 only) Provides the current skin resistance of the wearer in kohms.
-                        bandClient.SensorManager.Gsr.ReadingChanged += Gsr_ReadingChanged;
-                        await bandClient.SensorManager.Gsr.StartReadingsAsync();
-                    }
-                    else
-                        this.viewModel.GsrResistance = "Band2 only";
-
-
-                    if (bandClient.SensorManager.AmbientLight != null)
-                    {
-                        // Subscribe to Ambient Light - (Microsoft Band 2 only) Provides the current light intensity (illuminance) in lux (Lumes per sq. meter).
-                        bandClient.SensorManager.AmbientLight.ReadingChanged += AmbientLight_ReadingChanged;
-                        await bandClient.SensorManager.AmbientLight.StartReadingsAsync();
-                    }
-                    else
-                        this.viewModel.Brightness = "Band2 only";
-
-
-                    if (bandClient.SensorManager.Altimeter != null)
-                    {
-                        // Subscribe to Altimeter - (Microsoft Band 2 only) Provides current elevation data like total gain/loss, steps ascended/descended, flights ascended/descended, and elevation rate.
-                        bandClient.SensorManager.Altimeter.ReadingChanged += Altimeter_ReadingChanged;
-                        await bandClient.SensorManager.Altimeter.StartReadingsAsync();
-                    }
-                    else
-                        this.viewModel.AltimeterRate = "Band2 only";
-
-                    //Receive HeartRate data for a duration picked by the user, then stop the subscription.
-                    int ingestDuration = 0;
-                    switch (this.viewModel.IngestDuration)
-                    {
-                        case 0:
-                            ingestDuration = 1;
-                            break;
-                        case 1:
-                            ingestDuration = 5;
-                            break;
-                        case 2:
-                            ingestDuration = 10;
-                            break;
-                        case 3:
-                            ingestDuration = 15;
-                            break;
-
-                        default:
-                            ingestDuration = 1;
-                            break;
-                    }
-
-                    await Task.Delay(TimeSpan.FromMinutes(ingestDuration));
-
-                    await bandClient.SensorManager.HeartRate.StopReadingsAsync();
-                    await bandClient.SensorManager.SkinTemperature.StopReadingsAsync();
-                    await bandClient.SensorManager.Calories.StopReadingsAsync();
-                    await bandClient.SensorManager.Distance.StopReadingsAsync();
-                    await bandClient.SensorManager.Pedometer.StopReadingsAsync();
-
-                    if (bandClient.SensorManager.Barometer != null) await bandClient.SensorManager.Barometer.StopReadingsAsync();
-                    if (bandClient.SensorManager.Gsr != null) await bandClient.SensorManager.Gsr.StopReadingsAsync();
-                    if (bandClient.SensorManager.AmbientLight != null) await bandClient.SensorManager.AmbientLight.StopReadingsAsync();
-                    if (bandClient.SensorManager.Altimeter != null) await bandClient.SensorManager.Altimeter.StopReadingsAsync();
-
-                    this.viewModel.ButtonContent = "Start";
-                    this.viewModel.StatusMessage = string.Format("Done. {0} Microsoft Band telemetry were ingested.", samplesReceived);
+                if (!heartRateConsentGranted)
+                {
+                    this.viewModel.StatusMessage = "Access to the heart rate sensor is denied.";
                     return;
+                }
+
+                // Subscribe to HeartRate data.
+                bandClient.SensorManager.HeartRate.ReadingChanged += HeartRate_ReadingChanged;
+                await bandClient.SensorManager.HeartRate.StartReadingsAsync();
+
+                // hook up to the Skin temperature sensor ReadingChanged event 
+                bandClient.SensorManager.SkinTemperature.ReadingChanged += SkinTemperature_ReadingChanged;
+                await bandClient.SensorManager.SkinTemperature.StartReadingsAsync();
+
+                // hook up to the Distance sensor ReadingChanged event 
+                bandClient.SensorManager.Distance.ReadingChanged += Distance_ReadingChanged;
+                await bandClient.SensorManager.Distance.StartReadingsAsync();
+
+                // hook up to the Calories sensor ReadingChanged event 
+                bandClient.SensorManager.Calories.ReadingChanged += Calories_ReadingChanged;
+                await bandClient.SensorManager.Calories.StartReadingsAsync();
+
+                // Subscribe to Altimeter data.
+                bandClient.SensorManager.Pedometer.ReadingChanged += Pedometer_ReadingChanged;
+                await bandClient.SensorManager.Pedometer.StartReadingsAsync();
+
+                if (bandClient.SensorManager.Barometer != null)
+                {
+                    // Subscribe to Barometer data. - (Microsoft Band 2 only) Provides the current raw air pressure in hPa (hectopascals) and raw temperature in degrees Celsius.
+                    bandClient.SensorManager.Barometer.ReadingChanged += Barometer_ReadingChanged;
+                    await bandClient.SensorManager.Barometer.StartReadingsAsync();
+                }
+                else
+                    this.viewModel.AirPressure = "Band2 only";
+
+                if (bandClient.SensorManager.Gsr != null)
+                {
+                    // Subscribe to Galvanic Skin Response. - (Microsoft Band 2 only) Provides the current skin resistance of the wearer in kohms.
+                    bandClient.SensorManager.Gsr.ReadingChanged += Gsr_ReadingChanged;
+                    await bandClient.SensorManager.Gsr.StartReadingsAsync();
+                }
+                else
+                    this.viewModel.GsrResistance = "Band2 only";
+
+
+                if (bandClient.SensorManager.AmbientLight != null)
+                {
+                    // Subscribe to Ambient Light - (Microsoft Band 2 only) Provides the current light intensity (illuminance) in lux (Lumes per sq. meter).
+                    bandClient.SensorManager.AmbientLight.ReadingChanged += AmbientLight_ReadingChanged;
+                    await bandClient.SensorManager.AmbientLight.StartReadingsAsync();
+                }
+                else
+                    this.viewModel.Brightness = "Band2 only";
+
+
+                if (bandClient.SensorManager.Altimeter != null)
+                {
+                    // Subscribe to Altimeter - (Microsoft Band 2 only) Provides current elevation data like total gain/loss, steps ascended/descended, flights ascended/descended, and elevation rate.
+                    bandClient.SensorManager.Altimeter.ReadingChanged += Altimeter_ReadingChanged;
+                    await bandClient.SensorManager.Altimeter.StartReadingsAsync();
+                }
+                else
+                    this.viewModel.AltimeterRate = "Band2 only";
+
+                //Receive HeartRate data for a duration picked by the user, then stop the subscription.
+                int ingestDuration = 5;
+                //switch (this.viewModel.IngestDuration)
+                //{
+                //    case 0:
+                //        ingestDuration = 1;
+                //        break;
+                //    case 1:
+                //        ingestDuration = 5;
+                //        break;
+                //    case 2:
+                //        ingestDuration = 10;
+                //        break;
+                //    case 3:
+                //        ingestDuration = 15;
+                //        break;
+
+                //    default:
+                //        ingestDuration = 1;
+                //        break;
+                //}
+
+                await Task.Delay(TimeSpan.FromMinutes(ingestDuration));
+
+                await bandClient.SensorManager.HeartRate.StopReadingsAsync();
+                await bandClient.SensorManager.SkinTemperature.StopReadingsAsync();
+                await bandClient.SensorManager.Calories.StopReadingsAsync();
+                await bandClient.SensorManager.Distance.StopReadingsAsync();
+                await bandClient.SensorManager.Pedometer.StopReadingsAsync();
+
+                if (bandClient.SensorManager.Barometer != null) await bandClient.SensorManager.Barometer.StopReadingsAsync();
+                if (bandClient.SensorManager.Gsr != null) await bandClient.SensorManager.Gsr.StopReadingsAsync();
+                if (bandClient.SensorManager.AmbientLight != null) await bandClient.SensorManager.AmbientLight.StopReadingsAsync();
+                if (bandClient.SensorManager.Altimeter != null) await bandClient.SensorManager.Altimeter.StopReadingsAsync();
+
+                this.viewModel.ButtonContent = "Start";
+                this.viewModel.StatusMessage = string.Format("Done. {0} Microsoft Band telemetry were ingested.", samplesReceived);
+                return;
 
 
             }
@@ -697,7 +703,7 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string val = e.SensorReading.Brightness.ToString();
-            bandTelemetry.Brightness = val;
+            bandTelemetry.Brightness = e.SensorReading.Brightness;
 
             //ApplicationData.Current.LocalSettings.Values["Brightness"] = val;
             this.viewModel.Brightness = val;
@@ -729,7 +735,7 @@ namespace MicrosoftBandFieldGateway
             this.viewModel.AirPressure = val;
 
             string val2 = e.SensorReading.Temperature.ToString();
-            bandTelemetry.Temperature = val2;
+            bandTelemetry.Temperature = e.SensorReading.Temperature;
             //ApplicationData.Current.LocalSettings.Values["Temperature"] = val;
 
             IoTHubHttpServiceManager.SendIoTHubMessage(bandTelemetry);
@@ -766,8 +772,7 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string val = e.SensorReading.Temperature.ToString();
-            bandTelemetry.SkinTemperature = val;
-            bandTelemetry.Temperature = val;
+            bandTelemetry.SkinTemperature = e.SensorReading.Temperature;
 
             //ApplicationData.Current.LocalSettings.Values["SkinTemperature"] = val;
             this.viewModel.SkinTemperature = val;
@@ -798,8 +803,8 @@ namespace MicrosoftBandFieldGateway
             samplesReceived++;
 
             string hrm = e.SensorReading.HeartRate.ToString();
-            bandTelemetry.HeartRate = hrm;
-            bandTelemetry.Humidity = hrm; // using Humidity as placeholder because the current Remote Monitoring dashboard only shows 2 data points; humidity and temperature
+            bandTelemetry.HeartRate = e.SensorReading.HeartRate;
+            //bandTelemetry.Humidity = hrm; // using Humidity as placeholder because the current Remote Monitoring dashboard only shows 2 data points; humidity and temperature
 
             //ApplicationData.Current.LocalSettings.Values["HeartRate"] = hrm;
             this.viewModel.HeartRate = hrm;

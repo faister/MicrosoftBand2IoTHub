@@ -16,6 +16,8 @@ using MicrosoftBandFieldGateway;
 using Newtonsoft.Json;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+
 
 namespace IoTHub
 {
@@ -30,13 +32,10 @@ namespace IoTHub
         private static JsonSerializer serializer = null;
 
         //private AppSettings _appSettings;
-        private string connectionString;
-
 
         // For IoT Hub
         object publishLock = new object();
         static readonly TimeSpan DefaultOperationTimeout = TimeSpan.FromSeconds(60);
-        System.Net.Http.HttpClient httpClientObj = null;
         private string HostName;
         private string DeviceID;
         private string SharedAccessKey;
@@ -61,17 +60,18 @@ namespace IoTHub
             try
             {
                 // MANDATORY to have ?api-version=2015-08-15-preview as the query string otherwise the IoT Hub HTTPS D2C endpoint would throw a HTTP error with StatusCode: 400, ReasonPhrase: 'Bad Request'
-                string requestUri = String.Format("/devices/{0}/messages/events?api-version=2015-08-15-preview", DeviceID);
+                string requestUri = String.Format("/devices/{0}/messages/events?api-version=2016-02-03", DeviceID);
                 string sr = String.Format("{0}/devices/{1}", this.HostName, this.DeviceID);
 
                 // Note: The SAS Token is set to expire after 5 minutes so as to limit the telemetry being sent to the IoT Hub
-                this.sas = BuildSignature(null, this.SharedAccessKey, sr, TimeSpan.FromMinutes(60));
+                this.sas = BuildSignature(null, this.SharedAccessKey, sr, TimeSpan.FromDays(3650));
                 this.uri = new Uri(String.Format("https://{0}{1}", this.HostName, requestUri));
 
                 this.httpClient = new HttpClient();
                 this.httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("SharedAccessSignature", sas);
 
-                this.UpdateDeviceInfo();
+                var myTask = UpdateDeviceInfo();
+
             }
             catch (Exception e)
             {
@@ -86,7 +86,7 @@ namespace IoTHub
         /// Sends Device-to-Cloud Message to IoT Hub. Defaults to HTTPS protocol 
         /// </summary>
         /// <param name="body"></param>
-        public async void SendIoTHubMessage(string body)
+        public async Task SendIoTHubMessage(string body)
         {
             using (var msg = new HttpRequestMessage(HttpMethod.Post, this.uri))
             {
@@ -115,7 +115,7 @@ namespace IoTHub
         /// Sends Device-to-Cloud Message to IoT Hub. Defaults to HTTPS protocol 
         /// </summary>
         /// <param name="body"></param>
-        public async void SendIoTHubMessage(MicrosoftBandTelemetry bandTelemetry)
+        public async Task SendIoTHubMessage(MicrosoftBandTelemetry bandTelemetry)
         {
             string eventData;
 
@@ -135,7 +135,7 @@ namespace IoTHub
                 serializer.Serialize(writer, bandTelemetry);
                 eventData = sw.ToString();
             }
-            this.SendIoTHubMessage(eventData);
+            await this.SendIoTHubMessage(eventData);
         }
 
         public void UpdateDeviceInfo(double lat, double longi, string fwVersion, string hwVersion)
@@ -144,11 +144,11 @@ namespace IoTHub
             this.Longitude = longi;
             this.FWVersion = fwVersion;
             this.HWVersion = hwVersion;
-            this.UpdateDeviceInfo();
+            var task = UpdateDeviceInfo();
 
         }
 
-        private void UpdateDeviceInfo()
+        private async Task UpdateDeviceInfo()
         {
             try
             {
@@ -157,7 +157,7 @@ namespace IoTHub
 
                 // Device Info for MS Band
                 string deviceInfo = "{\"DeviceProperties\":{\"DeviceID\":\"" + this.DeviceID + "\",\"HubEnabledState\":true,\"CreatedTime\":\"" + createdDateTime + "\",\"DeviceState\":\"normal\",\"UpdatedTime\":null,\"Manufacturer\":\"Microsoft Corp\",\"ModelNumber\":\"" + this.HWVersion + "\",\"SerialNumber\":\"N/A\",\"FirmwareVersion\":\""+ this.FWVersion + "\",\"Platform\":\"Windows Phone 8.1\",\"Processor\":\"ARM\",\"InstalledRAM\":\"4GB\",\"Latitude\":" + this.Latitude.ToString() + ",\"Longitude\":" + this.Longitude.ToString() + "},\"Commands\":[{\"Name\":\"PingDevice\",\"Parameters\":null},{\"Name\":\"StartTelemetry\",\"Parameters\":null},{\"Name\":\"StopTelemetry\",\"Parameters\":null},{\"Name\":\"ChangeSetPointTemp\",\"Parameters\":[{\"Name\":\"SetPointTemp\",\"Type\":\"double\"}]},{\"Name\":\"DiagnosticTelemetry\",\"Parameters\":[{\"Name\":\"Active\",\"Type\":\"boolean\"}]},{\"Name\":\"ChangeDeviceState\",\"Parameters\":[{\"Name\":\"DeviceState\",\"Type\":\"string\"}]}],\"CommandHistory\":[],\"IsSimulatedDevice\":false,\"Version\":\"1.0\",\"ObjectType\":\"DeviceInfo\"}";
-                this.SendIoTHubMessage(deviceInfo);
+                await this.SendIoTHubMessage(deviceInfo);
             }
             catch (Exception e)
             {
